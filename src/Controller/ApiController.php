@@ -27,6 +27,8 @@ class ApiController extends Controller
      */
     public function boundAction(Request $request)
     {
+        var_dump($request->getContent());
+        
         return $this->jsonResponse(['challenge' => $this->getPost($request, 'challenge')]);
     }
 }
