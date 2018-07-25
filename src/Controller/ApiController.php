@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api")
  */
-class ApiController
+class ApiController extends Controller
 {
     /**
     * @Route("/")
@@ -27,9 +27,6 @@ class ApiController
      */
     public function boundAction(Request $request)
     {
-        $challenge = $request->get('challenge');
-        error_log($challenge);
-
-        return new Response($challenge);
+        return $this->jsonResponse(['challenge' => $this->getPost($request, 'challenge')]);
     }
 }
