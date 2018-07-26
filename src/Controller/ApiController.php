@@ -39,16 +39,14 @@ class ApiController extends Controller
      */
     public function testAction(Request $request, LoggerInterface $logger)
     {
-        $stdoutHandler = new StdoutHandler();
-        $logger->pushHandler($stdoutHandler);
+//        $stdoutHandler = new StdoutHandler();
+//        $logger->pushHandler($stdoutHandler);
 
-        $logger->info('test 1');
-        $logger->warning('test 2');
-        $logger->error('test 3');
-        $logger->notice('test 4');
-        $logger->critical('test 5');
-//        $request->getContent();
-        var_dump($request->getContent());
+        $logger->debug($request->getContent());
+
+        if ($request->getContent() && $this->getPost($request, 'challenge')) {
+            return $this->jsonResponse(['challenge' => $this->getPost($request, 'challenge')]);
+        }
 
         return new Response('test');
     }
