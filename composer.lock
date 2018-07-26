@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f8adbf2051c031f16f85f3f299684dc",
+    "content-hash": "7359269c60a9e1af689792e9861e15f9",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -645,6 +645,54 @@
                 "reflection"
             ],
             "time": "2018-06-14T14:45:07+00:00"
+        },
+        {
+            "name": "kmelia/monolog-stdout-handler",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/kmelia/monolog-stdout-handler.git",
+                "reference": "61ab11f88ac5a39151998aadfb956caee573c142"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/kmelia/monolog-stdout-handler/get/61ab11f88ac5a39151998aadfb956caee573c142.zip",
+                "reference": "61ab11f88ac5a39151998aadfb956caee573c142",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "~1.6",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Monolog": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Pasquier",
+                    "homepage": "https://bitbucket.org/kmelia",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A handler for Monolog that sends messages to stdout (with color).",
+            "homepage": "https://bitbucket.org/kmelia/monolog-stdout-handler",
+            "keywords": [
+                "color",
+                "log",
+                "monolog",
+                "stdout"
+            ],
+            "time": "2015-10-23T16:14:29+00:00"
         },
         {
             "name": "monolog/monolog",

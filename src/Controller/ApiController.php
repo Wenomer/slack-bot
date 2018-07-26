@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Monolog\Handler\StdoutHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,9 @@ class ApiController extends Controller
      */
     public function testAction(Request $request, LoggerInterface $logger)
     {
+        $stdoutHandler = new StdoutHandler();
+        $logger->pushHandler($stdoutHandler);
+
         $logger->info('test 1');
         $logger->warning('test 2');
         $logger->error('test 3');
