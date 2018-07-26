@@ -24,12 +24,14 @@ class Controller implements ContainerAwareInterface
     public function getPost(Request $request, $key)
     {
         $content = $request->getContent();
+
         if (empty($content)) {
-            throw new BadRequestHttpException('Content is empty');
+            return null;
         }
+
         $data  = json_decode($content, true);
 
-        return $data[$key];
+        return $data[$key] ?? null;
     }
 
     public function setContainer(ContainerInterface $container = null)
