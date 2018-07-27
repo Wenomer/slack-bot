@@ -41,9 +41,9 @@ class ApiController extends Controller
     {
         $logger->debug('JSON');
         $logger->debug($request->getContent());
-        $logger->debug('');
+        $logger->debug('GET');
         $logger->debug(print_r($_GET ,true ));
-        $logger->debug(print_r($_POST ,true ));
+        $logger->debug('POST');
         $logger->debug(print_r($_POST ,true ));
 
         if ($value = $this->getJson($request, 'challenge')) {
