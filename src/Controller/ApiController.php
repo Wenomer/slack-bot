@@ -46,11 +46,11 @@ class ApiController extends Controller
         $logger->debug(print_r($_POST ,true ));
         $logger->debug(print_r($_POST ,true ));
 
-        if ($request->getContent() && $value = $this->getJson($request, 'challenge')) {
+        if ($value = $this->getJson($request, 'challenge')) {
             return $this->jsonResponse(['challenge' => $value]);
         }
 
-        if ($request->getContent() && $request->get('command') == '/lunch') {
+        if ($request->get('command') == '/lunch') {
             $text = [
                 'text' => "Would you like to play a game?",
                 "attachments" => [

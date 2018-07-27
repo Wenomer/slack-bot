@@ -13,12 +13,12 @@ class Controller implements ContainerAwareInterface
 
     public function jsonResponse(array $data)
     {
-        return $this->response(json_encode($data));
+        return $this->response(json_encode($data), 200 , ['Content-type' => 'application/json']);
     }
 
-    public function response($data)
+    public function response($data, $status, $headers = [])
     {
-        return new Response($data);
+        return new Response($data, $status, $headers);
     }
 
     public function getJson(Request $request, $key)
