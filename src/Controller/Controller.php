@@ -21,7 +21,7 @@ class Controller implements ContainerAwareInterface
         return new Response($data);
     }
 
-    public function getPost(Request $request, $key)
+    public function getJson(Request $request, $key)
     {
         $content = $request->getContent();
 

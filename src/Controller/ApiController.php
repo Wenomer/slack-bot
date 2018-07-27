@@ -39,16 +39,18 @@ class ApiController extends Controller
      */
     public function testAction(Request $request, LoggerInterface $logger)
     {
+        $logger->debug('JSON');
         $logger->debug($request->getContent());
-
-        if ($request->getContent() && $this->getPost($request, 'challenge')) {
-            return $this->jsonResponse(['challenge' => $this->getPost($request, 'challenge')]);
-        }
-
+        $logger->debug('');
         $logger->debug(print_r($_GET ,true ));
         $logger->debug(print_r($_POST ,true ));
-        if ($request->getContent() && $this->getPost($request, 'command') == '/lunch') {
+        $logger->debug(print_r($_POST ,true ));
 
+        if ($request->getContent() && $value = $this->getJson($request, 'challenge')) {
+            return $this->jsonResponse(['challenge' => $value]);
+        }
+
+        if ($request->getContent() && $request->get('command') == '/lunch') {
             $text = [
                 'text' => "Would you like to play a game?",
                 "attachments" => [
