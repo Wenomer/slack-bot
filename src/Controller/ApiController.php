@@ -44,8 +44,7 @@ class ApiController extends Controller
         if ($request->getContent() && $this->getPost($request, 'challenge')) {
             return $this->jsonResponse(['challenge' => $this->getPost($request, 'challenge')]);
         }
-        $logger->info(['d' => 'f']);
-        $logger->debug($this->getPost($request, 'command'));
+        $logger->debug(print_r(json_decode($request->getContent(), true) ,true ));
         if ($request->getContent() && $this->getPost($request, 'command') == '/lunch') {
 
             $text = [
