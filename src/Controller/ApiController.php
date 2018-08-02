@@ -73,7 +73,7 @@ class ApiController extends Controller
         if ($request->get('payload')) {
             $data = json_decode($request->get('payload'), true);
             /* @var $call Calls */
-            $call = $this->getDoctrine()->getManager()->find($data['callback_id']);
+            $call = $this->getDoctrine()->getManager()->find(Calls::class, $data['callback_id']);
 
             foreach ($data['actions'] as $action) {
                 $call->setClicks($call->getClicks() + $action['value']);
