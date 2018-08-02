@@ -70,8 +70,8 @@ class ApiController extends Controller
             return $this->jsonResponse($this->getAttachment($call));
         }
 
-        if ($this->get('payload')) {
-            $logger->debug(print_r($this->get('payload') ,true ));
+        if ($request->get('payload')) {
+            $logger->debug(print_r($request->get('payload') ,true ));
 
             return new Response('response');
         }
