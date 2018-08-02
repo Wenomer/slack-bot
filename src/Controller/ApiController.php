@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Call;
 use Monolog\Handler\StdoutHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,15 @@ class ApiController extends Controller
         return new Response(
             '<html><body>Lucky number: '.$number.'</body></html>'
         );
+    }
+
+    /**
+     * @Route("/debug")
+     */
+    public function debugAction(Request $request)
+    {
+        var_dump($this->getDoctrine()->getManager());
+        die;
     }
 
     /**
@@ -51,30 +61,46 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
-            $text = [
-                'text' => "Would you like to play a game?",
-                "attachments" => [
-                    [
-                        "text" => "Choose a game to play",
-                        "fallback" => "You are unable to choose a game",
-                        "callback_id" => "wopr_game",
-                        "color" => "#3AA3E3",
-                        "attachment_type" => "default",
-                        "actions" => [
-                            [
-                                "name" => "game",
-                                "text" => "Chess",
-                                "type" => "button",
-                                "value" => "chess"
-                            ]
-                        ]
-                    ]
-                ],
-            ];
+            $call = new Call();
+            $call->setCount(0);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($call);
+            $entityManager->flush();
 
-            return $this->jsonResponse($text);
+
+            return $this->jsonResponse($this->getAttachment($call));
         }
 
         return new Response('test');
+    }
+
+    private function getAttachment(Call $call)
+    {
+        return[
+            'text' => "Click to increase value",
+            "attachments" => [
+                [
+                    "text" => "Click to increase, now: " . $call->getCount(),
+                    "fallback" => "You are unable increase",
+                    "callback_id" => $call->getId(),
+                    "color" => "#3AA3E3",
+                    "attachment_type" => "default",
+                    "actions" => [
+                        [
+                            "name" => "1",
+                            "text" => "+1",
+                            "type" => "button",
+                            "value" => "1"
+                        ],
+                        [
+                            "name" => "2",
+                            "text" => "+2",
+                            "type" => "button",
+                            "value" => "2"
+                        ]
+                    ]
+                ]
+            ],
+        ];
     }
 }

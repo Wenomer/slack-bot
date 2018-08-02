@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,5 +43,13 @@ class Controller implements ContainerAwareInterface
     public function get($service)
     {
         return $this->container->get($service);
+    }
+
+    /**
+     * @return Registry
+     */
+    public function getDoctrine()
+    {
+        return $this->container->get('doctrine');
     }
 }
