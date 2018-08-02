@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Call;
+use App\Entity\Calls;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Call|null find($id, $lockMode = null, $lockVersion = null)
- * @method Call|null findOneBy(array $criteria, array $orderBy = null)
- * @method Call[]    findAll()
- * @method Call[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Calls|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Calls|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Calls[]    findAll()
+ * @method Calls[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CallRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Call::class);
+        parent::__construct($registry, Calls::class);
     }
 
 //    /**

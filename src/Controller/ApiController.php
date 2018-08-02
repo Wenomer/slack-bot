@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Call;
+use App\Entity\Calls;
 use Monolog\Handler\StdoutHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +61,7 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
-            $call = new Call();
+            $call = new Calls();
             $call->setClicks(0);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($call);
@@ -74,7 +74,7 @@ class ApiController extends Controller
         return new Response('test');
     }
 
-    private function getAttachment(Call $call)
+    private function getAttachment(Calls $call)
     {
         return[
             'text' => "Click to increase value",
