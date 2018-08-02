@@ -72,10 +72,18 @@ class ApiController extends Controller
 
         if ($request->get('payload')) {
             $data = json_decode($request->get('payload'), true);
-            $logger->debug(print_r($data,true));
-            $logger->debug($data['callback_id']);
+            /* @var $call Calls */
+            $call = $this->getDoctrine()->getManager()->find($data['callback_id']);
 
-            return new Response('payload');
+            foreach ($data['actions'] as $action) {
+                $call->setClicks($call->getClicks() + $action['value']);
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($call);
+            $entityManager->flush();
+
+            return $this->jsonResponse($this->getAttachment($call));
         }
 
         return new Response('test');
