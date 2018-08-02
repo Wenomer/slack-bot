@@ -62,7 +62,7 @@ class ApiController extends Controller
 
         if ($request->get('command') == '/lunch') {
             $call = new Call();
-            $call->setCount(0);
+            $call->setClicks(0);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($call);
             $entityManager->flush();
@@ -80,7 +80,7 @@ class ApiController extends Controller
             'text' => "Click to increase value",
             "attachments" => [
                 [
-                    "text" => "Click to increase, now: " . $call->getCount(),
+                    "text" => "Click to increase, now: " . $call->getClicks(),
                     "fallback" => "You are unable increase",
                     "callback_id" => $call->getId(),
                     "color" => "#3AA3E3",

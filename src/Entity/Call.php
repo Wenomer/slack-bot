@@ -19,21 +19,21 @@ class Call
     /**
      * @ORM\Column(type="integer")
      */
-    private $count;
+    private $clicks;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getCount(): ?int
+    public function getClicks(): ?int
     {
-        return $this->count;
+        return $this->clicks;
     }
 
-    public function setCount(int $count): self
+    public function setClicks(int $clicks): self
     {
-        $this->count = $count;
+        $this->clicks = $clicks;
 
         return $this;
     }
