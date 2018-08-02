@@ -71,9 +71,11 @@ class ApiController extends Controller
         }
 
         if ($request->get('payload')) {
-            $logger->debug(print_r($request->get('payload') ,true ));
+            $data = json_decode($request->get('payload'), true);
+            $logger->debug(print_r($data,true));
+            $logger->debug($data['callback_id']);
 
-            return new Response('response');
+            return new Response('payload');
         }
 
         return new Response('test');
