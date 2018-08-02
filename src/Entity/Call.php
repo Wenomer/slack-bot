@@ -19,28 +19,11 @@ class Call
     /**
      * @ORM\Column(type="integer")
      */
-    private $requestId;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $count;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getRequestId(): ?int
-    {
-        return $this->requestId;
-    }
-
-    public function setRequestId(int $requestId): self
-    {
-        $this->requestId = $requestId;
-
-        return $this;
     }
 
     public function getCount(): ?int
