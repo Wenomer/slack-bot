@@ -67,15 +67,13 @@ class ApiController extends Controller
             $entityManager->persist($call);
             $entityManager->flush();
 
-
             return $this->jsonResponse($this->getAttachment($call));
         }
 
-        if ($this->getJson($request, 'payload')) {
-            $logger->debug(print_r($this->getJson($request, 'payload') ,true ));
+        if ($this->get('payload')) {
+            $logger->debug(print_r($this->get('payload') ,true ));
 
-
-            return $this->jsonResponse(['payload' => true]);
+            return new Response('response');
         }
 
         return new Response('test');
