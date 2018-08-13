@@ -81,7 +81,7 @@ class ApiController extends Controller
                 $index = $user == 'wenom' ? 1 : 2;
 
                 $call->{'setClicks' . $index}($call->{'getClicks' . $index}() + $action['value']);
-                $call->{'setName' . $index}($user);
+                $call->{'setUser' . $index}($user);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
