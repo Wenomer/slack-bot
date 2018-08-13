@@ -74,9 +74,13 @@ class ApiController extends Controller
             $data = json_decode($request->get('payload'), true);
             /* @var $call Calls */
             $call = $this->getDoctrine()->getManager()->find(Calls::class, $data['callback_id']);
+            $user = $data['user']['name'];
 
             foreach ($data['actions'] as $action) {
-                $call->setClicks($call->getClicks() + $action['value']);
+                $index = $user == 'wenom' ? 1 : 2;
+
+                $call->{'setClicks' . $index}($call->{'setClicks' . $index} + $action['value']);
+                $call->{'setName' . $index}($user);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -91,11 +95,16 @@ class ApiController extends Controller
 
     private function getAttachment(Calls $call)
     {
+        $users = '';
+        $users .= $call->getUser1() ? $call->getUser1() . ': ' . $call->getClicks1() . '\n': '';
+        $users .= $call->getUser2() ? $call->getUser2() . ': ' . $call->getClicks2() . '\n': '';
+        $users = $users === '' ? '----' : $users;
+
         return[
             'text' => "Click to increase value",
             "attachments" => [
                 [
-                    "text" => "Click to increase, now: " . $call->getClicks(),
+                    "text" => "Click to increase, now: \n " . $users,
                     "fallback" => "You are unable increase",
                     "callback_id" => $call->getId(),
                     "color" => "#3AA3E3",
