@@ -80,7 +80,7 @@ class ApiController extends Controller
             foreach ($data['actions'] as $action) {
                 $index = $user == 'wenom' ? 1 : 2;
 
-                $call->{'setClicks' . $index}($call->{'setClicks' . $index} + $action['value']);
+                $call->{'setClicks' . $index}($call->{'getClicks' . $index} + $action['value']);
                 $call->{'setName' . $index}($user);
             }
 
