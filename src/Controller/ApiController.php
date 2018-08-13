@@ -103,6 +103,7 @@ class ApiController extends Controller
 
         return[
             'text' => "Click to increase value",
+            "response_type" => "in_channel",
             "attachments" => [
                 [
                     "text" => "Click to increase, now: \n " . $users,
