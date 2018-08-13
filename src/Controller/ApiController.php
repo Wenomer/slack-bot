@@ -97,7 +97,7 @@ class ApiController extends Controller
     private function getAttachment(Calls $call)
     {
         $users = '';
-        $users .= $call->getUser1() ? '@' .$call->getUser1() . ': ' . $call->getClicks1() . '\n': '';
+        $users .= $call->getUser1() ? '@' .$call->getUser1() . ': ' . $call->getClicks1() . "\n": '';
         $users .= $call->getUser2() ? '@' .$call->getUser2() . ': ' . $call->getClicks2() . "\n": '';
         $users = $users === '' ? '----' : $users;
 
