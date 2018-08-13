@@ -62,7 +62,8 @@ class ApiController extends Controller
 
         if ($request->get('command') == '/lunch') {
             $call = new Calls();
-            $call->setClicks(0);
+            $call->setClicks1(0);
+            $call->setClicks2(0);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($call);
             $entityManager->flush();
