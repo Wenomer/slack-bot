@@ -144,7 +144,7 @@ class ApiController extends Controller
             'debug' => TRUE,
             'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
-                'channel' => 'wenom',
+                'channel' => 'U1KA3F420',
                 'text' => 'hello',
                 'as_user' => false,
             ],
