@@ -145,7 +145,8 @@ class ApiController extends Controller
             'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
                 'channel' => 'wenom',
-                'test' => 'hello',
+                'text' => 'hello',
+                'as_user' => false,
             ],
             'headers' => [
                 'Content-Type' => 'application/json',
