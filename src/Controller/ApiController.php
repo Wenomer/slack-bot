@@ -146,7 +146,6 @@ class ApiController extends Controller
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
                 'channel' => 'U1KA3F420',
                 'text' => 'hello',
-                'as_user' => false,
             ],
             'headers' => [
                 'Content-Type' => 'application/json',
