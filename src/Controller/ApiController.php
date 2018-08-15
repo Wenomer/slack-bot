@@ -138,9 +138,9 @@ class ApiController extends Controller
     public function post(LoggerInterface $logger)
     {
         $client = new Client([
-            'base_uri' => 'https://slack.com/api/chat.postMessage',
+            'base_uri' => 'https://slack.com/',
         ]);
-        $response = $client->post('the/endpoint', [
+        $response = $client->post('api/chat.postMessage', [
             'debug' => TRUE,
             'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
