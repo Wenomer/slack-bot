@@ -153,6 +153,6 @@ class ApiController extends Controller
             ]
         ]);
 
-        $logger->debug(print_r($response->getBody() ,true ));
+        $logger->debug(print_r($response->getHeaders() ,true ));
     }
 }
