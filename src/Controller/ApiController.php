@@ -143,9 +143,10 @@ class ApiController extends Controller
         $response = $client->post('api/chat.postMessage', [
             'debug' => TRUE,
             'form_params' => [
-//                'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
+                'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
                 'channel' => 'U1KA3F420',
                 'text' => 'hello',
+                'as_usesr' => false
             ],
             'headers' => [
                 'Content-Type' => 'application/json',
