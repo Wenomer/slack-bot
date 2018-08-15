@@ -142,7 +142,7 @@ class ApiController extends Controller
         ]);
         $response = $client->post('the/endpoint', [
             'debug' => TRUE,
-            'body' => [
+            'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
                 'channel' => 'wenom',
                 'test' => 'hello',
