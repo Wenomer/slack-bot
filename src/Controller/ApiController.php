@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Calls;
+use GuzzleHttp\Client;
 use Monolog\Handler\StdoutHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +62,10 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
+            $this->post($logger);
+        }
+
+        if ($request->get('command') == '/lunch2') {
             $call = new Calls();
             $call->setClicks1(0);
             $call->setClicks2(0);
@@ -128,5 +133,25 @@ class ApiController extends Controller
                 ]
             ],
         ];
+    }
+
+    public function post(LoggerInterface $logger)
+    {
+        $client = new Client([
+            'base_uri' => 'https://slack.com/api/chat.postMessage',
+        ]);
+        $response = $client->post('the/endpoint', [
+            'debug' => TRUE,
+            'body' => [
+                'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
+                'channel' => 'wenom',
+                'test' => 'hello',
+            ],
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ]
+        ]);
+
+        $logger->debug(print_r($response->getBody() ,true ));
     }
 }
