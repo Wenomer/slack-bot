@@ -62,7 +62,7 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
-            $this->post($logger, $request->get('user_id');
+            $this->post($logger, $request->get('user_id'));
         }
 
         if ($request->get('command') == '/lunch2') {
