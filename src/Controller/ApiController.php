@@ -173,6 +173,6 @@ class ApiController extends Controller
         ]);
 
         $logger->debug($response->getStatusCode());
-        $logger->debug(print_r((string)$response->getBody() ,true ));
+        $logger->debug(print_r($response->getBody()->getContents() ,true ));
     }
 }
