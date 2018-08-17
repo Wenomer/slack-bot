@@ -184,6 +184,6 @@ class ApiController extends Controller
             ]
         ]);
 
-        return \GuzzleHttp\json_decode($response->getBody()->getContents())['ims'];
+        return \GuzzleHttp\json_decode($response->getBody()->getContents(), true)['ims'];
     }
 }
