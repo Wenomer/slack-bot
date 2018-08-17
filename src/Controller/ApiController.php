@@ -65,12 +65,12 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
-            foreach ($this->list() as $user) {
-                $userPrivateChannel = new UserPrivateChannel();
-                $userPrivateChannel->setUserExternalId($user['user']);
-                $userPrivateChannel->setUserPrivateBotChannelId($user['id']);
-                $entityManager->persist($userPrivateChannel);
-            }
+//            foreach ($this->list() as $user) {
+//                $userPrivateChannel = new UserPrivateChannel();
+//                $userPrivateChannel->setUserExternalId($user['user']);
+//                $userPrivateChannel->setUserPrivateBotChannelId($user['id']);
+//                $entityManager->persist($userPrivateChannel);
+//            }
             $entityManager->flush();
             $this->post($logger, $request->get('user_id'));
         }
@@ -144,10 +144,10 @@ class ApiController extends Controller
         ];
     }
 
-    public function post(LoggerInterface $logger, $user_id)
+    public function post(LoggerInterface $logger, $userId)
     {
         /** @var UserPrivateChannel $privateChannel */
-        $privateChannel = $this->getDoctrine()->getManager()->getRepository(UserPrivateChannel::class) ->findBy(['user_external_id' => $user_id]);
+        $privateChannel = $this->getDoctrine()->getManager()->getRepository(UserPrivateChannel::class) ->findBy(['userExternalId' => $userId]);
 
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
