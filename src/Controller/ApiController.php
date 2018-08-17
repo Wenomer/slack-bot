@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Calls;
+use App\Entity\Call;
+use App\Entity\UserPrivateChannel;
 use GuzzleHttp\Client;
 use Monolog\Handler\StdoutHandler;
 use Psr\Log\LoggerInterface;
@@ -50,6 +51,8 @@ class ApiController extends Controller
      */
     public function testAction(Request $request, LoggerInterface $logger)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
         $logger->debug('JSON');
         $logger->debug($request->getContent());
         $logger->debug('GET');
@@ -62,14 +65,20 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
+            foreach ($this->list() as $user) {
+                $userPrivateChannel = new UserPrivateChannel();
+                $userPrivateChannel->setUserExternalId($user['user']);
+                $userPrivateChannel->setUserPrivateBotChannelId($user['id']);
+                $entityManager->persist($userPrivateChannel);
+            }
+            $entityManager->flush();
             $this->post($logger, $request->get('user_id'));
         }
 
         if ($request->get('command') == '/lunch2') {
-            $call = new Calls();
+            $call = new Call();
             $call->setClicks1(0);
             $call->setClicks2(0);
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($call);
             $entityManager->flush();
 
@@ -137,6 +146,9 @@ class ApiController extends Controller
 
     public function post(LoggerInterface $logger, $user_id)
     {
+        /** @var UserPrivateChannel $privateChannel */
+        $privateChannel = $this->getDoctrine()->getManager()->getRepository(UserPrivateChannel::class) ->findBy(['user_external_id' => $user_id]);
+
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
         ]);
@@ -144,7 +156,7 @@ class ApiController extends Controller
             'debug' => TRUE,
             'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
-                'channel' => $user_id,
+                'channel' => $privateChannel->getUserPrivateBotChannelId(),
                 'text' => 'hello',
                 'as_user' => false
             ],
@@ -157,7 +169,7 @@ class ApiController extends Controller
         $logger->debug(print_r($response->getHeaders() ,true ));
     }
 
-    public function list(LoggerInterface $logger)
+    public function list()
     {
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
@@ -172,7 +184,6 @@ class ApiController extends Controller
             ]
         ]);
 
-        $logger->debug($response->getStatusCode());
-        $logger->debug(print_r($response->getBody()->getContents() ,true ));
+        return \GuzzleHttp\json_decode($response->getBody()->getContents())['ims'];
     }
 }
