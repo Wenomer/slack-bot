@@ -8,4 +8,6 @@ return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
+    Http\HttplugBundle\HttplugBundle::class => ['all' => true],
+    Nexy\SlackBundle\NexySlackBundle::class => ['all' => true],
 ];
