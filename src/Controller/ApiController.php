@@ -147,7 +147,7 @@ class ApiController extends Controller
     public function post(LoggerInterface $logger, $userId)
     {
         /** @var UserPrivateChannel $privateChannel */
-        $privateChannel = $this->getDoctrine()->getManager()->getRepository(UserPrivateChannel::class) ->findBy(['userExternalId' => $userId]);
+        $privateChannel = $this->getDoctrine()->getManager()->getRepository(UserPrivateChannel::class)->findOneBy(['userExternalId' => $userId]);
 
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
