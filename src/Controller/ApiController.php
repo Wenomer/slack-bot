@@ -62,7 +62,7 @@ class ApiController extends Controller
         }
 
         if ($request->get('command') == '/lunch') {
-            $this->list($logger);
+            $this->post($logger, $request->get('user_id');
         }
 
         if ($request->get('command') == '/lunch2') {
@@ -135,7 +135,7 @@ class ApiController extends Controller
         ];
     }
 
-    public function post(LoggerInterface $logger)
+    public function post(LoggerInterface $logger, $user_id)
     {
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
@@ -144,12 +144,12 @@ class ApiController extends Controller
             'debug' => TRUE,
             'form_params' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
-                'channel' => 'D9PRWHVQD',
+                'channel' => $user_id,
                 'text' => 'hello',
                 'as_user' => false
             ],
             'headers' => [
-                'Content-Type' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
             ]
         ]);
 
