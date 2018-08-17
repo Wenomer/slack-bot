@@ -162,12 +162,10 @@ class ApiController extends Controller
         $client = new Client([
             'base_uri' => 'https://slack.com/api/',
         ]);
-        $response = $client->get('conversations.list', [
+        $response = $client->get('im.list', [
             'debug' => TRUE,
             'query' => [
                 'token' => 'xoxb-329104271632-tOhuGbOBQpCiydd2gnldkKMl',
-                'exclude_archived' => true,
-                'types' => 'private_channel',
             ],
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -175,6 +173,6 @@ class ApiController extends Controller
         ]);
 
         $logger->debug($response->getStatusCode());
-        $logger->debug(print_r($response->getBody() ,true ));
+        $logger->debug(print_r($response->get() ,true ));
     }
 }
