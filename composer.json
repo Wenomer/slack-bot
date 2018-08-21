@@ -9,6 +9,8 @@
         "nexylan/slack": "^2.0",
         "nexylan/slack-bundle": "^2.0",
         "php-http/guzzle6-adapter": "^1.1",
+        "react/event-loop": "^1.0",
+        "react/http": "^0.8.3",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",
