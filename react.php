@@ -10,9 +10,9 @@ $server = new React\Http\Server(function (Psr\Http\Message\ServerRequestInterfac
     );
 });
 
-$socket = new React\Socket\Server(8080, $loop);
+$socket = new React\Socket\Server(8000, $loop);
 $server->listen($socket);
 
-echo "Server running at http://127.0.0.1:8080\n";
+echo "Server running at http://127.0.0.1:8000\n";
 
 $loop->run();
