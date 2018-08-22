@@ -3,6 +3,7 @@ require_once('vendor/autoload.php');
 $loop = React\EventLoop\Factory::create();
 
 $server = new React\Http\Server(function (Psr\Http\Message\ServerRequestInterface $request) {
+
     return new React\Http\Response(
         200,
         array('Content-Type' => 'text/plain'),
@@ -10,7 +11,7 @@ $server = new React\Http\Server(function (Psr\Http\Message\ServerRequestInterfac
     );
 });
 
-$socket = new React\Socket\Server(8000, $loop);
+$socket = new React\Socket\Server(9000, $loop);
 $server->listen($socket);
 
 echo "Server running at http://127.0.0.1:8000\n";
