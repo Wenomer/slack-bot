@@ -1,18 +1,34 @@
 <?php
 require_once('vendor/autoload.php');
-$loop = React\EventLoop\Factory::create();
 
-$server = new React\Http\Server(function (Psr\Http\Message\ServerRequestInterface $request) {
+use React\Promise\Promise;
+use Psr\Http\Message\ServerRequestInterface;
+use React\EventLoop\Factory;
+use React\Http\Response;
+use React\Http\Server;
 
+$loop = Factory::create();
+
+$server = new Server([function(ServerRequestInterface $request, $next) {
+    return $next($request);
+
+}, function (Psr\Http\Message\ServerRequestInterface $request) {
     return new React\Http\Response(
         200,
-        array('Content-Type' => 'text/plain'),
-        "Hello World!\n"
+        ['Content-Type' => 'text/plain'],
+        "Hello World2\n"
     );
-});
-$port = getenv('PORT');
+}]);
+
+$port = getenv('PORT') ;
+$port = $port ?: 8000;
 $socket = new React\Socket\Server($port, $loop);
 $server->listen($socket);
+
+$server->on('error', function (Exception $e) {
+    echo "error" . PHP_EOL;
+    echo $e->getMessage() . PHP_EOL;
+});
 
 echo "Server running at http://127.0.0.1:{$port}\n";
 
