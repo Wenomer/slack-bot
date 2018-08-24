@@ -22,7 +22,7 @@ $server = new Server([function(ServerRequestInterface $request, $next) {
 
 $port = getenv('PORT') ;
 $port = $port ?: 8000;
-$socket = new React\Socket\Server($port, $loop);
+$socket = new React\Socket\Server('0.0.0.0:' . $port, $loop);
 $server->listen($socket);
 
 $server->on('error', function (Exception $e) {
