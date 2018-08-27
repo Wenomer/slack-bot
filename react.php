@@ -6,6 +6,10 @@ use React\EventLoop\Factory;
 use React\Http\Response;
 use React\Http\Server;
 use \React\Socket\Server as Socket;
+use Symfony\Component\Dotenv\Dotenv;
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
 
 $loop = Factory::create();
 
@@ -21,8 +25,10 @@ $server = new Server([function(ServerRequestInterface $request, $next) {
 }]);
 
 $port = getenv('PORT') ;
-$port = $port ?: 8000;
-$socket = new Socket('0.0.0.0:' . $port, $loop);
+$host = getenv('HOST') ;
+
+$uri = sprintf('%s:%s', $host, $port);
+$socket = new Socket($uri, $loop);
 $server->listen($socket);
 
 $server->on('error', function (Exception $e) {
@@ -30,6 +36,6 @@ $server->on('error', function (Exception $e) {
     echo $e->getMessage() . PHP_EOL;
 });
 
-echo "Server running at http://127.0.0.1:{$port}\n";
+echo "Server running at {$uri}\n";
 
 $loop->run();

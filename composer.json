@@ -1,6 +1,7 @@
 {
     "require": {
         "react/event-loop": "^1.0",
-        "react/http": "^0.8.3"
+        "react/http": "^0.8.3",
+        "symfony/dotenv": "^4.1"
     }
 }
