@@ -1,19 +1,19 @@
 <?php
 require_once('vendor/autoload.php');
 
-use React\Promise\Promise;
 use Psr\Http\Message\ServerRequestInterface;
 use React\EventLoop\Factory;
 use React\Http\Response;
 use React\Http\Server;
+use \React\Socket\Server as Socket;
 
 $loop = Factory::create();
 
 $server = new Server([function(ServerRequestInterface $request, $next) {
     return $next($request);
 
-}, function (Psr\Http\Message\ServerRequestInterface $request) {
-    return new React\Http\Response(
+}, function (ServerRequestInterface $request) {
+    return new Response(
         200,
         ['Content-Type' => 'text/plain'],
         "Hello World2\n"
@@ -22,7 +22,7 @@ $server = new Server([function(ServerRequestInterface $request, $next) {
 
 $port = getenv('PORT') ;
 $port = $port ?: 8000;
-$socket = new React\Socket\Server('0.0.0.0:' . $port, $loop);
+$socket = new Socket('0.0.0.0:' . $port, $loop);
 $server->listen($socket);
 
 $server->on('error', function (Exception $e) {
