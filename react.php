@@ -8,10 +8,9 @@ use React\Http\Server;
 use \React\Socket\Server as Socket;
 use Symfony\Component\Dotenv\Dotenv;
 
-var_dump(getenv('ENV'));
-
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
+if (!getenv('APP_ENV')) {
+    (new Dotenv())->load(__DIR__.'/.env');
+}
 
 $loop = Factory::create();
 
