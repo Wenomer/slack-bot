@@ -2,6 +2,11 @@
     "require": {
         "react/event-loop": "^1.0",
         "react/http": "^0.8.3",
-        "symfony/dotenv": "^4.1"
+        "symfony/dotenv": "^4.1",
+        "react/child-process": "^0.5.2"
+    },
+
+    "autoload": {
+        "psr-4": { "App\\": "src/" }
     }
 }
